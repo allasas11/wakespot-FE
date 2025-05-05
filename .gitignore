@@ -1,1 +1,28 @@
+
+# Vite-specific
+.cache/
+.temp/
+
+# Common
 node_modules/
+dist/
+.DS_Store
+.env
+.env.*
+*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
