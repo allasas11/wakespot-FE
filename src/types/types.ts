@@ -1,3 +1,6 @@
+import type { ItemIncludedValue } from "../config/itemsIncluded";
+import type { CategoryValue } from "../config/categories";
+
 export interface Location {
     _id: string;
     name: string;
@@ -15,4 +18,14 @@ export interface Instructor {
   activeLocations: Location[];
   yearsOfExperience?: number;
   certifications: string[];
+}
+
+export interface EquipmentPackage {
+  _id: string;
+  name: string;
+  description: string;
+  price: number;
+  itemsIncluded: ItemIncludedValue[];
+  category: CategoryValue; 
+  imageUrl?: string;
 }
