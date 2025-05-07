@@ -28,7 +28,7 @@ const EquipmentPackageCreatePage: React.FC = () => {
     const { name, value } = e.target;
 
     if (name === "itemsIncluded") {
-      return; // handled by checkboxes
+      return;
     }
 
     setFormData((prev) => ({

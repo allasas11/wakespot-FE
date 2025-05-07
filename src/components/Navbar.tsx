@@ -1,7 +1,11 @@
 import { NavLink } from "react-router"
 import LogoutButton from "./LogoutButton"
+import { useAuth } from "../AuthContext"
 
 function Navbar() {
+
+  const { user } = useAuth()
+    
 
   return (
     <nav>
@@ -48,17 +52,22 @@ function Navbar() {
                 <NavLink to="/dashboard/profile">Profile</NavLink>
             </li>
 
-            <li>
-                <NavLink to="/login">Login</NavLink>
-            </li>
+            {user ? (
+                <li>
+                    <LogoutButton />
+                </li>
+            ) : (
+                <>
+                    <li>
+                        <NavLink to="/login">Login</NavLink>
+                    </li>
 
-            <li>
-                <NavLink to="/register">Register</NavLink>
-            </li>
-
-            <li>
-                <LogoutButton />
-            </li>
+                    <li>
+                        <NavLink to="/register">Register</NavLink>
+                    </li>
+                </>
+            ) 
+        }
 
       </ul>
       
