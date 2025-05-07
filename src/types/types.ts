@@ -29,3 +29,14 @@ export interface EquipmentPackage {
   category: CategoryValue; 
   imageUrl?: string;
 }
+
+export interface Session {
+  _id: string;
+  location: Location;
+  instructor?: Instructor;
+  date: string;
+  time: string;
+  durationMinutes: number;
+  price: number;
+  status: string;
+}
