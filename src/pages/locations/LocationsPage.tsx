@@ -54,7 +54,14 @@ const LocationsPage: React.FC = () => {
       <ul style={{ listStyle: 'none', paddingLeft: 0 }}>
         {locations.map((location) => (
           <li key={location._id}>
-            <Link to={`/locations/${location._id}`} >{location.name}</Link>
+            <Link to={`/locations/${location._id}`} >
+                {location.name} 
+                {location.imageUrl && (
+                    <div style={{ marginBottom: '20px' }}>
+                    <img src={location.imageUrl} alt={location.name} style={{ width: '150px', borderRadius: '6px' }} />
+                    </div>
+                )}
+            </Link>
           </li>
         ))}
       </ul>
