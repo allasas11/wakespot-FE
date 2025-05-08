@@ -32,9 +32,11 @@ function Navbar() {
                     <NavLink to="/sessions">Sessions</NavLink>
                 </li>
 
-                <li>
-                    <NavLink to="/bookings">Bookings</NavLink>
-                </li>
+                {user && (
+                    <li>
+                        <NavLink to="/bookings">Bookings</NavLink>
+                    </li>
+                )}
 
                 {user && (
                     <>

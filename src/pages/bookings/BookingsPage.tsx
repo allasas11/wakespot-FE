@@ -49,11 +49,13 @@ const BookingsPage: React.FC = () => {
     <div>
       <h1>{user?.role === "ADMIN" ? "All Bookings" : "My Bookings"}</h1>
 
-      <div style={{ marginBottom: "20px" }}>
-        <Link to="/bookings/create">
-          <button>Book a Session</button>
-        </Link>
-      </div>
+      {user && (
+        <div style={{ marginBottom: "20px" }}>
+          <Link to="/bookings/create">
+            <button>Book a Session</button>
+          </Link>
+        </div>
+      )}
 
       <ul style={{ listStyle: "none", paddingLeft: 0 }}>
         {filteredBookings.length > 0 ? (
