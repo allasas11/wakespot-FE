@@ -4,12 +4,16 @@ import api from "../../api";
 import { Link } from "react-router";
 
 import type { EquipmentPackage } from "../../types/types";
+import { useAuth } from "../../AuthContext";
+import ROLES from "../../config/roles";
 
 const EquipmentPackagesPage: React.FC = () => {
   const [packages, setPackages] = useState<EquipmentPackage[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
+  const { user } = useAuth();
+  
   useEffect(() => {
     const fetchPackages = async () => {
       try {
@@ -41,11 +45,13 @@ const EquipmentPackagesPage: React.FC = () => {
     <div>
       <h1>Equipment Packages</h1>
 
-      <div style={{ marginBottom: "20px" }}>
-        <Link to="/packages/create">
-          <button>Create New Package</button>
-        </Link>
-      </div>
+      {user?.role === ROLES.ADMIN && (
+        <div style={{ marginBottom: "20px" }}>
+          <Link to="/packages/create">
+            <button>Create New Package</button>
+          </Link>
+        </div>
+      )}
 
       <ul style={{ listStyle: "none", paddingLeft: 0 }}>
         {packages.map((pkg) => (

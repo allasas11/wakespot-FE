@@ -4,11 +4,15 @@ import api from "../../api";
 import { Link } from "react-router";
 
 import type { Instructor } from "../../types/types";
+import { useAuth } from "../../AuthContext";
+import ROLES from "../../config/roles";
 
 const InstructorsPage: React.FC = () => {
   const [instructors, setInstructors] = useState<Instructor[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
+
+  const { user } = useAuth();
 
   useEffect(() => {
     const fetchInstructors = async () => {
@@ -41,11 +45,13 @@ const InstructorsPage: React.FC = () => {
     <div>
         <h1>Wakeboarding Instructors</h1>
 
-        <div style={{ marginBottom: '20px' }}>
+        {user?.role === ROLES.ADMIN && (
+          <div style={{ marginBottom: '20px' }}>
             <Link to="/instructors/create">
                 <button>Create New Instructor</button>
             </Link>
-        </div>
+          </div>
+        )}
  
         <ul style={{ listStyle: 'none', paddingLeft: 0 }}>
             {instructors.map((instructor) => (

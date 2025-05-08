@@ -4,6 +4,8 @@ import api from "../../api";
 import { BarLoader } from "react-spinners";
 
 import type { Session } from "../../types/types";
+import { useAuth } from "../../AuthContext";
+import ROLES from "../../config/roles";
 
 const SessionPage: React.FC = () => {
   const navigate = useNavigate();
@@ -12,6 +14,8 @@ const SessionPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
+  const { user } = useAuth();
+  
   useEffect(() => {
     const fetchSession = async () => {
       try {
@@ -78,10 +82,12 @@ const SessionPage: React.FC = () => {
             {session.instructor ? session.instructor.name : "Not assigned"}
         </p>
 
-        <div>
-          <button onClick={handleEdit}>Edit Session</button>
-          <button onClick={handleDelete}>Delete Session</button>
-        </div>
+        {user?.role === ROLES.ADMIN && (
+          <div>
+            <button onClick={handleEdit}>Edit Session</button>
+            <button onClick={handleDelete}>Delete Session</button>
+          </div>
+        )}
 
         <div style={{ marginTop: "20px" }}>
             <button type="button" onClick={() => navigate(-1)}>Back</button>

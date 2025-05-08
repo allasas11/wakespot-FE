@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router"
 import HomePage from "./pages/HomePage"
 import LoginPage from "./pages/auth/LoginPage"
 import RegisterPage from "./pages/auth/RegisterPage"
-import Navbar from "./components/Navbar"
+import Navbar from "./components/Header"
 import PrivateRoute from "./components/PrivateRoute"
 import DashboardPage from "./pages/dashboard/DashboardPage"
 import SettingsPage from "./pages/dashboard/SettingsPage"
@@ -46,6 +46,7 @@ function App() {
             <Route path='profile' element={<ProfilePage />} />
             <Route path='admin' element={<AdminDashboardPage />} />
           </Route>
+        </Route>
 
           <Route path='locations'>
             <Route index element={<LocationsPage />} />
@@ -81,8 +82,6 @@ function App() {
             <Route path="create" element={<BookingCreatePage />} />
             <Route path="edit/:id" element={<BookingEditPage />} />
           </Route>
-
-        </Route>
       </Routes>
     </BrowserRouter>
   )

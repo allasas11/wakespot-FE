@@ -4,11 +4,15 @@ import api from "../../api";
 import { Link } from "react-router";
 
 import type { Location } from "../../types/types";
+import { useAuth } from "../../AuthContext";
+import ROLES from "../../config/roles";
 
 const LocationsPage: React.FC = () => {
   const [locations, setLocations] = useState<Location[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
+
+  const { user } = useAuth();
 
   useEffect(() => {
     const fetchLocations = async () => {
@@ -45,11 +49,13 @@ const LocationsPage: React.FC = () => {
     <div>
       <h1>Wakeboarding Spots</h1>
 
-      <div style={{ marginBottom: '20px' }}>
-        <Link to="/locations/create">
-          <button>Create New Location</button>
-        </Link>
+      {user?.role === ROLES.ADMIN && (
+        <div style={{ marginBottom: '20px' }}>
+          <Link to="/locations/create">
+            <button>Create New Location</button>
+          </Link>
       </div>
+      )}
 
       <ul style={{ listStyle: 'none', paddingLeft: 0 }}>
         {locations.map((location) => (
