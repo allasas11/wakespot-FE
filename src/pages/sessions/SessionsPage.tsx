@@ -65,12 +65,17 @@ const SessionsPage: React.FC = () => {
                             {session.price}
                         
                             <span
-                                style={{
+                              style={{
                                 marginLeft: "10px",
-                                color: session.status === "available" ? "green" : "red"
-                                }}
+                                display: "inline-block",
+                                padding: "4px 8px",
+                                borderRadius: "4px",
+                                fontSize: "0.9rem",
+                                backgroundColor: session.status === "available" ? "#C8E6C9" : "#FFCDD2",
+                                color: session.status === "available" ? "#388E3C" : "#D32F2F"
+                              }}
                             >
-                                {session.status === "available" ? "☐" : "☑"}
+                              {session.status === "available" ? "Available" : "Booked"}
                             </span>
                         </Link>
                     </li>

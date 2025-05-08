@@ -1,6 +1,13 @@
 import type { ItemIncludedValue } from "../config/itemsIncluded";
 import type { CategoryValue } from "../config/categories";
 
+export interface User {
+  _id: string;
+  username: string;
+  email: string;
+  role: "ADMIN" | "CUSTOMER";
+}
+
 export interface Location {
     _id: string;
     name: string;
@@ -39,4 +46,15 @@ export interface Session {
   durationMinutes: number;
   price: number;
   status: string;
+}
+
+export interface Booking {
+  _id: string;
+  session: Session; 
+  user: User; 
+  equipmentPackages: EquipmentPackage[];
+  totalPrice: number;
+  status: "confirmed" | "cancelled" | "completed";
+  paymentStatus: "pending" | "paid" | "refunded";
+  bookingDate: string;
 }
