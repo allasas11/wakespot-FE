@@ -4,12 +4,16 @@ import { BarLoader } from "react-spinners";
 import api from "../../api";
 
 import type { Instructor } from "../../types/types";
+import { useAuth } from "../../AuthContext";
+import ROLES from "../../config/roles";
 
 const InstructorPage: React.FC = () => {
   const [instructor, setInstructor] = useState<Instructor | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
+  const { user } = useAuth();
+  
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
@@ -101,13 +105,12 @@ const InstructorPage: React.FC = () => {
             </div>
         )}
 
-
-        <div>
-          <button onClick={handleEdit}>Edit Instructor</button>
-          <button onClick={handleDelete}>Delete Instructor</button>
-        </div>
-
-
+        {user?.role === ROLES.ADMIN && (
+          <div>
+            <button onClick={handleEdit}>Edit Instructor</button>
+            <button onClick={handleDelete}>Delete Instructor</button>
+          </div>
+        )}
 
         <div style={{ marginTop: '20px' }}>
             <button onClick={() => navigate(-1)}>Back</button>

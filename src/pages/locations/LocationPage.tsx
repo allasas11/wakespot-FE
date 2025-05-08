@@ -4,6 +4,8 @@ import { BarLoader } from "react-spinners";
 import api from "../../api";
 
 import type { Location } from "../../types/types";
+import { useAuth } from "../../AuthContext";
+import ROLES from "../../config/roles";
 
 const LocationPage: React.FC = () => {
   const [location, setLocation] = useState<Location | null>(null);
@@ -12,6 +14,8 @@ const LocationPage: React.FC = () => {
 
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+
+  const { user } = useAuth();
 
   useEffect(() => {
     const fetchLocation = async () => {
@@ -72,9 +76,15 @@ const LocationPage: React.FC = () => {
             </div>
         )}
 
-        <div>
+        {user?.role === ROLES.ADMIN && (
+          <div>
             <button onClick={handleEdit}>Edit Location</button>
             <button onClick={handleDelete}>Delete Location</button>
+          </div>
+        )}
+
+        <div style={{ marginTop: '20px' }}>
+            <button onClick={() => navigate(-1)}>Back</button>
         </div>
 
     </div>

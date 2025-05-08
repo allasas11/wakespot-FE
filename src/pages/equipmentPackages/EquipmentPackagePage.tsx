@@ -4,6 +4,8 @@ import { BarLoader } from "react-spinners";
 import api from "../../api";
 
 import type { EquipmentPackage } from "../../types/types";
+import { useAuth } from "../../AuthContext";
+import ROLES from "../../config/roles";
 
 const EquipmentPackagePage: React.FC = () => {
   const navigate = useNavigate();
@@ -11,6 +13,8 @@ const EquipmentPackagePage: React.FC = () => {
   const [pkg, setPackage] = useState<EquipmentPackage | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
+
+  const { user } = useAuth();
 
   useEffect(() => {
     const fetchPackage = async () => {
@@ -81,10 +85,12 @@ const EquipmentPackagePage: React.FC = () => {
             </div>
         )}
 
-        <div>
-          <button onClick={handleEdit}>Edit Package</button>
-          <button onClick={handleDelete}>Delete Package</button>
-        </div>
+        {user?.role === ROLES.ADMIN && (
+          <div>
+            <button onClick={handleEdit}>Edit Package</button>
+            <button onClick={handleDelete}>Delete Package</button>
+          </div>
+        )}
 
         <div style={{ marginTop: "20px" }}>
             <button onClick={() => navigate(-1)}>Back</button>

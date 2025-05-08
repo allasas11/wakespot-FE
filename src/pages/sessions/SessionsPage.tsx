@@ -4,12 +4,16 @@ import api from "../../api";
 import { Link } from "react-router";
 
 import type { Session } from "../../types/types";
+import { useAuth } from "../../AuthContext";
+import ROLES from "../../config/roles";
 
 const SessionsPage: React.FC = () => {
   const [sessions, setSessions] = useState<Session[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
+  const { user } = useAuth();
+  
   useEffect(() => {
     const fetchSessions = async () => {
       try {
@@ -41,11 +45,13 @@ const SessionsPage: React.FC = () => {
     <div>
       <h1>Available Wakeboarding Sessions</h1>
 
+      {user?.role === ROLES.ADMIN && (
         <div style={{ marginBottom: "20px" }}>
           <Link to="/sessions/create">
             <button>Create New Session</button>
           </Link>
         </div>
+      )}
 
         <ul style={{ listStyle: "none", paddingLeft: 0 }}>
             {sessions.length > 0 ? (
