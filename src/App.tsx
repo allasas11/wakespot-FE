@@ -1,4 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router"
+import { Bounce, ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 import HomePage from "./pages/HomePage"
 import LoginPage from "./pages/auth/LoginPage"
 import RegisterPage from "./pages/auth/RegisterPage"
@@ -34,6 +36,21 @@ function App() {
   return (
     <BrowserRouter>
       <Navbar />
+
+    <ToastContainer
+      position="bottom-right"
+      autoClose={3000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="dark"
+      transition={Bounce}
+    />
+
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/login' element={<LoginPage />} />
