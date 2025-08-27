@@ -58,3 +58,11 @@ export interface Booking {
   paymentStatus: "pending" | "paid" | "refunded";
   bookingDate: string;
 }
+
+export type Review = {
+  _id: string
+  user: User
+  instructor: Instructor
+  rating: number
+  comment: string
+}
