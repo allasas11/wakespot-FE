@@ -57,6 +57,7 @@ export interface Booking {
   status: "confirmed" | "cancelled" | "completed";
   paymentStatus: "pending" | "paid" | "refunded";
   bookingDate: string;
+  cancellationReason?: string;
 }
 
 export type Review = {
