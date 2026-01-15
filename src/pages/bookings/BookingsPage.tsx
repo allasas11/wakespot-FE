@@ -5,7 +5,7 @@ import { Link } from "react-router";
 import { Booking } from "../../types/types";
 import { useAuth } from "../../AuthContext";
 import AdminBookingModal from "../../components/AdminBookingModal";
-import { Button } from "@mui/material";
+import { Button, Chip } from "@mui/material";
 
 const BookingsPage: React.FC = () => {
   const [bookings, setBookings] = useState<Booking[]>([]);
@@ -81,27 +81,37 @@ const BookingsPage: React.FC = () => {
                   style={{ fontSize: "1.2rem", display: "block", margin: "10px 0" }}
                 >
                   <strong>{new Date(booking.session.date).toLocaleDateString()}</strong> – {booking.session.time} • €{totalPrice}{" "}
-                  <span
-                    style={{
-                      marginLeft: "10px",
-                      fontWeight: "bold",
-                      color:
-                        booking.status === "confirmed"
-                          ? "#4CAF50"
-                          : booking.status === "cancelled"
-                          ? "#FF9800"
-                          : booking.status === "completed"
-                          ? "#2196F3"
-                          : "#F44336",
-                    }}
-                  >
-                    ({booking.status})
-                  </span>
+                  <Chip
+                    label={booking.status}
+                    size="small"
+                    color={
+                      booking.status === "confirmed"
+                        ? "success"
+                        : booking.status === "cancelled"
+                        ? "warning"
+                        : booking.status === "completed"
+                        ? "info"
+                        : "error"
+                    }
+                    style={{ marginLeft: "10px", fontWeight: "bold" }}
+                  />
                 </Link>
 
-                <p style={{ margin: "0 0 0 20px", fontSize: "0.95rem" }}>
-                  User: {booking.user.username} • Payment: {booking.paymentStatus}
-                </p>
+                <span style={{ margin: "0 0 0 20px", fontSize: "0.95rem" }}>
+                  User: {booking.user.username} • 
+                  <Chip
+                    label={booking.paymentStatus}
+                    size="small"
+                    color={
+                      booking.paymentStatus === "paid"
+                        ? "success"
+                        : booking.paymentStatus === "pending"
+                        ? "warning"
+                        : "error"
+                    }
+                    style={{ marginLeft: "8px", fontWeight: "bold" }}
+                  />
+                </span>
 
                 <p style={{ margin: "0 0 0 20px", fontSize: "0.95rem" }}>
                   Session Price: €{booking.totalPrice}
